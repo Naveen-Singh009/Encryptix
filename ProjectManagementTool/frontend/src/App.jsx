@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [data, setData] = useState()
+
+  const getData = async () => {
+    const response = await axios.get("http://localhost:8000/getData");
+    setData(response.data)
+  }
+
+  useEffect(()=> {
+    getData()
+  }, [])
 
   return (
     <>
-      <p>This is the program</p>
+      {data}
     </>
   )
 }
